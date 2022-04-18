@@ -6,6 +6,7 @@ app = Flask(__name__)
 
 Breast_Cancer = pickle.load(open('Models/cancer.pkl', 'rb'))
 Diabetes = pickle.load(open('Models/diabetes.pkl', 'rb'))
+Heart = pickle.load(open('Models/heart.pkl','rb'))
 
 
 @app.route('/healthcare/api/v1/breastcancer', methods=['POST'])
@@ -42,10 +43,76 @@ def Diabetes_Pridect():
         result=str(output)
     ), 200)
 
+@app.route('/healthcare/api/v1/heart', methods=['POST'])
+def heart_Pridect():
+    data = request.get_json(force=True)
+    # data = {
+    #     "Age": 28,
+    #     "ChestPainType": "ta",
+    #     "Cholesterol":         230,
+    #     "Sex": "M",
+    #     "RestingECG":         "ST",
+    #     "ExerciseAngina":     "Y",
+    #     "ST_Slope":           "down",
+    #     "FastingBS": 1,
+    #     "RestingBP": 145,
+    #     "MaxHR": 60,
+    #     "Oldpeak":-2.6
+    # }
+
+    painType = ["asy","ata","nap","ta"]
+    sexType = ["f","m"]
+    restingECGType = ["lvh", "normal", "st"]
+    exerciseAnginaType = ["n","y"]
+    stslopeType = ["down","flat","up"]
+
+    ChestPainType = [0,0,0,0]
+    Sex = [0,0]
+    RestingECG = [0,0,0]
+    ExerciseAngina = [0,0]
+    ST_Slope = [0,0,0]
+
+    for i in range(0, len(painType)):
+        if data["ChestPainType"].lower() == painType[i]:
+            ChestPainType[i] = 1
+
+    for i in range(0, len(sexType)):
+        if data["Sex"].lower() == sexType[i]:
+            Sex[i] = 1
+
+    for i in range(0, len(restingECGType)):
+        if data["RestingECG"].lower() == restingECGType[i]:
+            RestingECG[i] = 1
+
+    for i in range(0, len(exerciseAnginaType)):
+        if data["ExerciseAngina"].lower() == exerciseAnginaType[i]:
+            ExerciseAngina[i] = 1
+
+    for i in range(0, len(stslopeType)):
+        if data["ST_Slope"].lower() == stslopeType[i]:
+            ST_Slope[i] = 1
+
+    heartpridect = [data["Age"], data["RestingBP"], data["Cholesterol"], data["FastingBS"],
+                     data["MaxHR"], data["Oldpeak"],ChestPainType[0],
+                     ChestPainType[1],
+                     ChestPainType[2], ChestPainType[3],
+                     Sex[0], Sex[1],
+                     RestingECG[0], RestingECG[1], RestingECG[2],
+                     ExerciseAngina[0], ExerciseAngina[1],
+                     ST_Slope[0], ST_Slope[1], ST_Slope[2]
+                     ]
+    print(heartpridect)
+    heartpridect = np.array([heartpridect])
+    model_pridect = Heart.predict(heartpridect)
+    output = model_pridect[0]
+    return make_response(jsonify(
+        result=str(output)
+    ), 200)
 
 @app.route('/', methods=['GET'])
 def helloworld():
     return 'Hello World'
+
 
 
 if __name__ == '__main__':
