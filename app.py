@@ -7,6 +7,7 @@ app = Flask(__name__)
 Breast_Cancer = pickle.load(open('Models/cancer.pkl', 'rb'))
 Diabetes = pickle.load(open('Models/diabetes.pkl', 'rb'))
 Heart = pickle.load(open('Models/heart.pkl','rb'))
+Liver = pickle.load(open('Models/liver.pkl','rb'))
 
 
 @app.route('/healthcare/api/v1/breastcancer', methods=['POST'])
@@ -104,6 +105,53 @@ def heart_Pridect():
     print(heartpridect)
     heartpridect = np.array([heartpridect])
     model_pridect = Heart.predict(heartpridect)
+    output = model_pridect[0]
+    return make_response(jsonify(
+        result=str(output)
+    ), 200)
+
+@app.route('/healthcare/api/v1/liver', methods=['POST'])
+def Liver_Pridect():
+    data = request.get_json(force=True)
+    # data = {
+    # "Age": "65",
+    # "Gender": "F",
+    # "Total_Bilirubin": "0.7",
+    # "Direct_Bilirubin": "0.1",
+    # "Alkaline_Phosphotase": "187",
+    # "Alamine_Aminotransferase": "16",
+    # "Aspartate_Aminotransferase": "18",
+    # "Total_Protiens": "6.8",
+    # "Albumin": "3.3",
+    # "Albumin_and_Globulin_Ratio": "0.90",
+    # }
+
+
+    sexType = ["f","m"]
+    Sex = [0,0]
+
+
+
+    for i in range(0, len(sexType)):
+        if data["Gender"].lower() == sexType[i]:
+            Sex[i] = 1
+
+
+    liverpridect = [
+        data["Age"],
+        data["Total_Bilirubin"],
+        data["Direct_Bilirubin"],
+        data["Alkaline_Phosphotase"],
+        data["Alamine_Aminotransferase"],
+        data["Aspartate_Aminotransferase"],
+        data["Total_Protiens"],
+        data["Albumin"],
+        data["Albumin_and_Globulin_Ratio"],
+        Sex[0], Sex[1],
+                     ]
+    print(liverpridect)
+    liverpridect = np.array([liverpridect])
+    model_pridect = Liver.predict(liverpridect)
     output = model_pridect[0]
     return make_response(jsonify(
         result=str(output)
