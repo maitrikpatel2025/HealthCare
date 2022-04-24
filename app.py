@@ -6,8 +6,9 @@ app = Flask(__name__)
 
 Breast_Cancer = pickle.load(open('Models/cancer.pkl', 'rb'))
 Diabetes = pickle.load(open('Models/diabetes.pkl', 'rb'))
-Heart = pickle.load(open('Models/heart.pkl','rb'))
-Liver = pickle.load(open('Models/liver.pkl','rb'))
+Heart = pickle.load(open('Models/heart.pkl', 'rb'))
+Liver = pickle.load(open('Models/liver.pkl', 'rb'))
+kidney = pickle.load(open('Models/kidney.pkl', 'rb'))
 
 
 @app.route('/healthcare/api/v1/breastcancer', methods=['POST'])
@@ -44,6 +45,7 @@ def Diabetes_Pridect():
         result=str(output)
     ), 200)
 
+
 @app.route('/healthcare/api/v1/heart', methods=['POST'])
 def heart_Pridect():
     data = request.get_json(force=True)
@@ -61,17 +63,17 @@ def heart_Pridect():
     #     "Oldpeak":-2.6
     # }
 
-    painType = ["asy","ata","nap","ta"]
-    sexType = ["f","m"]
+    painType = ["asy", "ata", "nap", "ta"]
+    sexType = ["f", "m"]
     restingECGType = ["lvh", "normal", "st"]
-    exerciseAnginaType = ["n","y"]
-    stslopeType = ["down","flat","up"]
+    exerciseAnginaType = ["n", "y"]
+    stslopeType = ["down", "flat", "up"]
 
-    ChestPainType = [0,0,0,0]
-    Sex = [0,0]
-    RestingECG = [0,0,0]
-    ExerciseAngina = [0,0]
-    ST_Slope = [0,0,0]
+    ChestPainType = [0, 0, 0, 0]
+    Sex = [0, 0]
+    RestingECG = [0, 0, 0]
+    ExerciseAngina = [0, 0]
+    ST_Slope = [0, 0, 0]
 
     for i in range(0, len(painType)):
         if data["ChestPainType"].lower() == painType[i]:
@@ -94,14 +96,14 @@ def heart_Pridect():
             ST_Slope[i] = 1
 
     heartpridect = [data["Age"], data["RestingBP"], data["Cholesterol"], data["FastingBS"],
-                     data["MaxHR"], data["Oldpeak"],ChestPainType[0],
-                     ChestPainType[1],
-                     ChestPainType[2], ChestPainType[3],
-                     Sex[0], Sex[1],
-                     RestingECG[0], RestingECG[1], RestingECG[2],
-                     ExerciseAngina[0], ExerciseAngina[1],
-                     ST_Slope[0], ST_Slope[1], ST_Slope[2]
-                     ]
+                    data["MaxHR"], data["Oldpeak"], ChestPainType[0],
+                    ChestPainType[1],
+                    ChestPainType[2], ChestPainType[3],
+                    Sex[0], Sex[1],
+                    RestingECG[0], RestingECG[1], RestingECG[2],
+                    ExerciseAngina[0], ExerciseAngina[1],
+                    ST_Slope[0], ST_Slope[1], ST_Slope[2]
+                    ]
     print(heartpridect)
     heartpridect = np.array([heartpridect])
     model_pridect = Heart.predict(heartpridect)
@@ -109,6 +111,7 @@ def heart_Pridect():
     return make_response(jsonify(
         result=str(output)
     ), 200)
+
 
 @app.route('/healthcare/api/v1/liver', methods=['POST'])
 def Liver_Pridect():
@@ -126,16 +129,12 @@ def Liver_Pridect():
     # "Albumin_and_Globulin_Ratio": "0.90",
     # }
 
-
-    sexType = ["f","m"]
-    Sex = [0,0]
-
-
+    sexType = ["f", "m"]
+    Sex = [0, 0]
 
     for i in range(0, len(sexType)):
         if data["Gender"].lower() == sexType[i]:
             Sex[i] = 1
-
 
     liverpridect = [
         data["Age"],
@@ -148,7 +147,7 @@ def Liver_Pridect():
         data["Albumin"],
         data["Albumin_and_Globulin_Ratio"],
         Sex[0], Sex[1],
-                     ]
+    ]
     print(liverpridect)
     liverpridect = np.array([liverpridect])
     model_pridect = Liver.predict(liverpridect)
@@ -157,10 +156,49 @@ def Liver_Pridect():
         result=str(output)
     ), 200)
 
+
+@app.route('/healthcare/api/v1/kidney', methods=['POST'])
+def Kidney_Pridect():
+    data = request.get_json(force=True)
+
+    kidneypridect = [
+        data["age"],
+        data["blood_pressure"],
+        data["specific_gravity"],
+        data["albumin"],
+        data["sugar"],
+        data["red_blood_cells"],
+        data["pus_cell"],
+        data["pus_cell_clumps"],
+        data["bacteria"],
+        data["blood_glucose_random"],
+        data["blood_urea"],
+        data["serum_creatinine"],
+        data["sodium"],
+        data["potassium"],
+        data["haemoglobin"],
+        data["packed_cell_volume"],
+        data["white_blood_cell_count"],
+        data["red_blood_cell_count"],
+        data["hypertension"],
+        data["diabetes_mellitus"],
+        data["coronary_artery_disease"],
+        data["appetite"],
+        data["peda_edema"],
+        data["aanemia"],
+    ]
+    print(kidneypridect)
+    kidneypridect = np.array([kidneypridect])
+    model_pridect = kidney.predict(kidneypridect)
+    output = model_pridect[0]
+    return make_response(jsonify(
+        result=str(output)
+    ), 200)
+
+
 @app.route('/', methods=['GET'])
 def helloworld():
     return 'Hello World'
-
 
 
 if __name__ == '__main__':
