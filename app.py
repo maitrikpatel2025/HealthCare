@@ -11,7 +11,7 @@ Liver = pickle.load(open('Models/liver.pkl', 'rb'))
 kidney = pickle.load(open('Models/kidney.pkl', 'rb'))
 
 
-@app.route('/healthcare/api/v1/breastcancer', methods=['POST'])
+@app.route('/healthcare/api/v1/breastcancer/add', methods=['POST'])
 def breast_Cancer_Pridect():
     data = request.get_json(force=True)
     cancerpridect = [data["radius_mean"], data["texture_mean"], data["perimeter_mean"], data["area_mean"],
@@ -31,7 +31,7 @@ def breast_Cancer_Pridect():
     ), 200)
 
 
-@app.route('/healthcare/api/v1/diabetes', methods=['POST'])
+@app.route('/healthcare/api/v1/diabetes/add', methods=['POST'])
 def Diabetes_Pridect():
     data = request.get_json(force=True)
     diabetespridect = [data["pregnancies"], data["glucose"], data["bloodPressure"],
@@ -46,7 +46,7 @@ def Diabetes_Pridect():
     ), 200)
 
 
-@app.route('/healthcare/api/v1/heart', methods=['POST'])
+@app.route('/healthcare/api/v1/heart/add', methods=['POST'])
 def heart_Pridect():
     data = request.get_json(force=True)
     # data = {
@@ -113,7 +113,7 @@ def heart_Pridect():
     ), 200)
 
 
-@app.route('/healthcare/api/v1/liver', methods=['POST'])
+@app.route('/healthcare/api/v1/liver/add', methods=['POST'])
 def Liver_Pridect():
     data = request.get_json(force=True)
     # data = {
@@ -157,7 +157,7 @@ def Liver_Pridect():
     ), 200)
 
 
-@app.route('/healthcare/api/v1/kidney', methods=['POST'])
+@app.route('/healthcare/api/v1/kidney/add', methods=['POST'])
 def Kidney_Pridect():
     data = request.get_json(force=True)
 
