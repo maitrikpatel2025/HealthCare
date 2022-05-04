@@ -1,6 +1,8 @@
 from flask import Flask, abort, jsonify, request, make_response
 import numpy as np
+import pandas as pd
 import pickle
+import json
 
 app = Flask(__name__)
 
@@ -10,6 +12,31 @@ Heart = pickle.load(open('Models/heart.pkl', 'rb'))
 Liver = pickle.load(open('Models/liver.pkl', 'rb'))
 kidney = pickle.load(open('Models/kidney.pkl', 'rb'))
 
+data_Cancer = pd.read_csv('./DataSet/BrestCancer.csv')
+data_diabetes = pd.read_csv('./DataSet/diabetes.csv')
+data_heart = pd.read_csv('./DataSet/heart.csv')
+data_liver = pd.read_csv('./DataSet/liver.csv')
+data_kidney = pd.read_csv('./DataSet/kidney.csv')
+
+data_Cancer.insert(0, '_id', range(1, 1 + len(data_Cancer)))
+data_Cancer2 = data_Cancer.to_json(orient='records')
+json_Cancer = json.dumps(data_Cancer2)
+
+data_diabetes.insert(0, '_id', range(1, 1 + len(data_diabetes)))
+data_diabetes2 = data_diabetes.to_json(orient='records')
+json_diabetes = json.dumps(data_diabetes2)
+
+data_heart.insert(0, '_id', range(1, 1 + len(data_heart)))
+data_heart2 = data_heart.to_json(orient='records')
+json_heart = json.dumps(data_heart2)
+
+data_liver.insert(0, '_id', range(1, 1 + len(data_liver)))
+data_liver2 = data_liver.to_json(orient='records')
+json_liver = json.dumps(data_liver2)
+
+data_kidney.insert(0, '_id', range(1, 1 + len(data_kidney)))
+data_kidney2 = data_kidney.to_json(orient='records')
+json_kidney = json.dumps(data_kidney2)
 
 @app.route('/healthcare/api/v1/breastcancer/add', methods=['POST'])
 def breast_Cancer_Pridect():
@@ -30,6 +57,11 @@ def breast_Cancer_Pridect():
         result=str(output)
     ), 200)
 
+@app.route('/healthcare/api/v1/breastcancer', methods=['get'])
+def Breast_cancer(json_string = json_Cancer):
+    return make_response(
+        json.loads(json_string)
+    , 200)
 
 @app.route('/healthcare/api/v1/diabetes/add', methods=['POST'])
 def Diabetes_Pridect():
@@ -45,6 +77,11 @@ def Diabetes_Pridect():
         result=str(output)
     ), 200)
 
+@app.route('/healthcare/api/v1/diabetes', methods=['get'])
+def diabetes(json_string = json_diabetes):
+    return make_response(
+        json.loads(json_string)
+    , 200)
 
 @app.route('/healthcare/api/v1/heart/add', methods=['POST'])
 def heart_Pridect():
@@ -112,6 +149,11 @@ def heart_Pridect():
         result=str(output)
     ), 200)
 
+@app.route('/healthcare/api/v1/heart', methods=['get'])
+def Heart(json_string = json_heart):
+    return make_response(
+        json.loads(json_string)
+    , 200)
 
 @app.route('/healthcare/api/v1/liver/add', methods=['POST'])
 def Liver_Pridect():
@@ -156,6 +198,11 @@ def Liver_Pridect():
         result=str(output)
     ), 200)
 
+@app.route('/healthcare/api/v1/liver', methods=['get'])
+def Liver(json_string = json_liver):
+    return make_response(
+        json.loads(json_string)
+    , 200)
 
 @app.route('/healthcare/api/v1/kidney/add', methods=['POST'])
 def Kidney_Pridect():
@@ -194,6 +241,12 @@ def Kidney_Pridect():
     return make_response(jsonify(
         result=str(output)
     ), 200)
+
+@app.route('/healthcare/api/v1/kidney', methods=['get'])
+def Kidney(json_string = json_kidney):
+    return make_response(
+        json.loads(json_string)
+    , 200)
 
 
 @app.route('/', methods=['GET'])
