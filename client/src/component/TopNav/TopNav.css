@@ -1,0 +1,63 @@
+.Nav-text {
+    color: #001E6C !important;
+    font-size: 18px !important;
+    font-family: "Lato";
+    font-weight: 600 !important;
+    padding: 15px 15px !important;
+    width: max-content !important;
+    background-color: #fff !important;
+    border-style: none !important;
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+  }
+  
+  .Nav-text:hover {
+    color: #FF7070 !important;
+  }
+  
+  .Nav-text .text-black:hover {
+    color: #FF7070 !important;
+  }
+  
+  .nav-link {
+    color: #001E6C !important;
+  }
+  
+  .btn-black {
+    color: #fff;
+    background-color: #000;
+    border-color: #000;
+  }
+  
+  .btn-black:hover {
+    color: #FF7070;
+  }
+  
+  .TopNav {
+    z-index: 1000 !important;
+  }
+  
+  .navbar-nav {
+    background-color: #fff;
+  }
+  
+  .dropdown-menu.show {
+    padding: 10px;
+  }
+  
+  @media (max-width: 1200px) {
+    .Nav-text {
+      margin-right: auto !important;
+      margin-left: auto !important;
+      text-align: center !important;
+    }
+  
+    .dropdown .nav-link {
+      padding: 0px !important;
+    }
+  
+    .dropdown-menu {
+      margin-top: 10px !important;
+    }
+  }
+  

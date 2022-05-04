@@ -1,0 +1,29 @@
+export const CREATE_CANCER ='CREATE_CANCER';
+export const FETCH_CANCERS = 'FETCH_CANCERS';
+/* export const FETCH_CANCER ='FETCH_CANCER';
+export const EDIT_CANCER='EDIT_CANCER';
+export const DELETE_CANCER ='DELETE_CANCER';
+ */
+export const CREATE_DIABETE ='CREATE_DIABETE';
+export const FETCH_DIABETES = 'FETCH_DIABETES';
+/* export const FETCH_DIABETE ='FETCH_DIABETE';
+export const EDIT_DIABETE='EDIT_DIABETE';
+export const DELETE_DIABETE ='DELETE_DIABETE'; */
+
+export const CREATE_HEART ='CREATE_HEART';
+export const FETCH_HEARTS = 'FETCH_HEARTS';
+/* export const FETCH_HEART ='FETCH_HEART';
+export const EDIT_HEART='EDIT_HEART';
+export const DELETE_HEART ='DELETE_HEART'; */
+
+export const CREATE_KINDEY ='CREATE_KINDEY';
+export const FETCH_KINDEYS = 'FETCH_KINDEYS';
+/* export const FETCH_KINDEY ='FETCH_KINDEY';
+export const EDIT_KINDEY='EDIT_KINDEY';
+export const DELETE_KINDEY ='DELETE_KINDEY'; */
+
+export const CREATE_LIVER ='CREATE_LIVER';
+export const FETCH_LIVERS = 'FETCH_LIVERS';
+/* export const FETCH_LIVER ='FETCH_LIVER';
+export const EDIT_LIVER='EDIT_LIVER';
+export const DELETE_LIVER ='DELETE_LIVER'; */

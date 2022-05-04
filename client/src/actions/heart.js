@@ -20,7 +20,6 @@ export const createHeart = formValues => async (dispatch) => {
 
 export const fetchHearts = () => async dispatch => {
   const response = await heart.get('/healthcare/api/v1/heart');
-
   dispatch({ type: FETCH_HEARTS, payload: response.data });
 };
 /* 

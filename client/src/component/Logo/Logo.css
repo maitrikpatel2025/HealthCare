@@ -1,0 +1,8 @@
+.Logo{
+    flex-shrink: 0;
+    padding-right: 0.8rem;
+    display: flex;
+    align-items: center;
+    width: 91px;
+    height: 34px;
+}

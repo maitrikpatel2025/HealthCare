@@ -1,43 +1,43 @@
-import cancer from '../api/index';
+import diabete from '../api/index';
 
 /* import {
-    CREATE_CANCER,
-    FETCH_CANCERS,
-    FETCH_CANCER,
-    DELETE_CANCER,
-    EDIT_CANCER
+    CREATE_DIABETE,
+    FETCH_DIABETES,
+    FETCH_DIABETE,
+    DELETE_DIABETE,
+    EDIT_DIABETE
   } from './types'; */
 import {
-  CREATE_CANCER,
-  FETCH_CANCERS,
+  CREATE_DIABETE,
+  FETCH_DIABETES,
 } from './types';
 
 
-export const createCancer = formValues => async (dispatch) => {
-  const response = await cancer.post('/healthcare/api/v1/breastcancer/add', { ...formValues });
-  dispatch({ type: CREATE_CANCER, payload: response.data });
+export const createDiabete = formValues => async (dispatch) => {
+  const response = await diabete.post('/healthcare/api/v1/diabetes/add', { ...formValues });
+  dispatch({ type: CREATE_DIABETE, payload: response.data });
 };
 
-export const fetchCancers = () => async dispatch => {
-  const response = await cancer.get('/healthcare/api/v1/breastcancer');
+export const fetchDiabetes = () => async dispatch => {
+  const response = await diabete.get('/healthcare/api/v1/diabetes');
 
-  dispatch({ type: FETCH_CANCERS, payload: response.data });
+  dispatch({ type: FETCH_DIABETES, payload: response.data });
 };
 /* 
-export const fetchCancer = _id => async dispatch => {
-  const response = await cancer.get(`/healthcare/api/v1/breastcancer/${_id}`);
+export const fetchDiabete= _id => async dispatch => {
+  const response = await diabete.get(`/healthcare/api/v1/diabetes/${_id}`);
 
-  dispatch({ type: FETCH_CANCER, payload: response.data });
+  dispatch({ type: FETCH_DIABETE, payload: response.data });
 };
 
-export const editCancer = (_id, formValues) => async dispatch => {
-  const response = await cancer.put(`/healthcare/api/v1/breastcancer/${_id}`, formValues);
+export const editDiabete= (_id, formValues) => async dispatch => {
+  const response = await diabete.put(`/healthcare/api/v1/diabetes/${_id}`, formValues);
 
-  dispatch({ type: EDIT_CANCER, payload: response.data });
+  dispatch({ type: EDIT_DIABETE, payload: response.data });
 };
 
-export const deleteCancer = _id => async dispatch => {
-  await cancer.delete(`/healthcare/api/v1/breastcancer/${_id}`);
+export const deleteDiabete= _id => async dispatch => {
+  await diabete.delete(`/healthcare/api/v1/diabetes/${_id}`);
 
-  dispatch({ type: DELETE_CANCER, payload: _id });
+  dispatch({ type: DELETE_DIABETE, payload: _id });
 }; */
