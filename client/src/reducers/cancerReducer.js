@@ -14,13 +14,16 @@ import {
 }                           from "../actions/types"; */
 
 
-const cancerReducer = (state = {}, action) => {
+const InitialState = {
+    cancerResult: '',
+  };
+const cancerReducer = (state = InitialState, action) => {
     switch (action.type) {
 
         case FETCH_CANCERS:
            return { ...state, ..._.mapKeys(action.payload, '_id')}; 
         case CREATE_CANCER:
-            return{...state,[action.payload._id]: action.payload};
+            return{...state, cancerResult: action.payload};
 /*         case FETCH_CANCER:
             return{...state,[action.payload._id]: action.payload};
         case EDIT_CANCER:

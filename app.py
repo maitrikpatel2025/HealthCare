@@ -1,10 +1,26 @@
 from flask import Flask, abort, jsonify, request, make_response
+from flask_cors import CORS, cross_origin
+
 import numpy as np
 import pandas as pd
 import pickle
 import json
 
 app = Flask(__name__)
+CORS(app)
+
+@app.after_request
+def after_request(response):
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    response.headers.add(
+        "Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept"
+    )
+    response.headers.add("Access-Control-Allow-Methods",
+                         "GET,PUT,POST,DELETE,OPTIONS")
+    response.headers.add("Access-Control-Allow-Credentials", "true")
+    return response
+
+
 
 Breast_Cancer = pickle.load(open('Models/cancer.pkl', 'rb'))
 Diabetes = pickle.load(open('Models/diabetes.pkl', 'rb'))
@@ -37,6 +53,7 @@ json_liver = json.dumps(data_liver2)
 data_kidney.insert(0, '_id', range(1, 1 + len(data_kidney)))
 data_kidney2 = data_kidney.to_json(orient='records')
 json_kidney = json.dumps(data_kidney2)
+
 
 @app.route('/healthcare/api/v1/breastcancer/add', methods=['POST'])
 def breast_Cancer_Pridect():
@@ -252,6 +269,7 @@ def Kidney(json_string = json_kidney):
 @app.route('/', methods=['GET'])
 def helloworld():
     return 'Hello World'
+
 
 
 if __name__ == '__main__':

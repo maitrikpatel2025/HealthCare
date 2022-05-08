@@ -10,18 +10,23 @@ import {
   CREATE_CANCER,
   FETCH_CANCERS,
 } from './types';
+import history from "../history";
 
 
 export const createCancer = formValues => async (dispatch) => {
-  const response = await cancer.post('/healthcare/api/v1/breastcancer/add', { ...formValues });
-  dispatch({ type: CREATE_CANCER, payload: response.data });
+  const response = await cancer.post('/healthcare/api/v1/breastcancer/add', { ...formValues },
+  {headers: {
+    "Content-Type": 'application/json',
+  }});
+  dispatch({ type: CREATE_CANCER, payload: response.data.result });
+  history.reload('/brestcancer');
 };
 
 export const fetchCancers = () => async dispatch => {
   const response = await cancer.get('/healthcare/api/v1/breastcancer');
-
   dispatch({ type: FETCH_CANCERS, payload: response.data });
 };
+
 /* 
 export const fetchCancer = _id => async dispatch => {
   const response = await cancer.get(`/healthcare/api/v1/breastcancer/${_id}`);

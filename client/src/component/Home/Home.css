@@ -74,13 +74,6 @@
   .tagline2_layout2{
       color: #562AF0;
   }
-  .intro1_layout2{
-      font-weight:normal;
-      font-size: 20px;
-      text-align: left;
-      padding-bottom: 20px;
-      
-  }
 .img_animat2{
     -webkit-animation: fadeInUp 1500ms ease-in-out; /* Chrome, Safari, Opera */
     animation: fadeInUp 1500ms ease-in-out;

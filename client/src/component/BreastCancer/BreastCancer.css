@@ -1,0 +1,36 @@
+.intro1_layout2 {
+    font-weight: 400;
+    font-size: 20px;
+    text-align: left;
+    -webkit-animation: fadeInUp 1500ms ease-in-out; /* Chrome, Safari, Opera */
+    animation: fadeInUp 1500ms ease-in-out;
+}
+.intro1_lay1 {
+    font-weight: 400;
+    font-size: 20px;
+    -webkit-animation: fadeInUp 1500ms ease-in-out; /* Chrome, Safari, Opera */
+    animation: fadeInUp 1500ms ease-in-out;
+}
+
+@-webkit-keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(40px);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+    }
+}
+
+/* Standard syntax */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
