@@ -1,16 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import Image from "../../assets/g12.svg";
+import Image from "../../assets/images.png";
 // import CountPlot from "../CountPlot/CountPlot";
-import { createCancer } from "../../actions/cancer";
-import "./BreastCancer.css";
-import BreastCancerForm from "../BreastCancerForm/BreastCancerForm";
+import { createDiabete } from "../../actions/diabetes";
 import DiabeteForm from "../DiabeteForm/DiabeteForm";
 
-class BreastCancer extends Component {
+class Diabetes extends Component {
   onSubmit = (formValues) => {
-    this.props.createCancer(formValues);
+    this.props.createDiabete(formValues);
   };
   renderCancers() {
     if (this.props.cancers === "0") {
@@ -34,7 +32,7 @@ class BreastCancer extends Component {
     } else {
       return (
         <div>
-          <BreastCancerForm onSubmit={this.onSubmit} />
+          <DiabeteForm onSubmit={this.onSubmit} />
         </div>
       );
     }
@@ -48,7 +46,8 @@ class BreastCancer extends Component {
     //   return cancer.diagnosis === "B";
     // }).length;
     return (
-      <div className="BreastCancer">
+      <div className="Diabete">
+
         {/* <div className="container">
             <div className="justify-content-center">
               <CountPlot
@@ -77,7 +76,7 @@ class BreastCancer extends Component {
                 className="kw kx ji bn ky kz la lb lc ld le lf lg lh li lj lk ll lm ln lo lp lq lr ls lt gc"
                 data-selectable-paragraph=""
               >
-                <strong className="ba">Breast Cancer Prediction</strong>
+                <strong className="ba">Diabetes Prediction</strong>
               </h1>
               {this.renderCancers()}
             </div>
@@ -90,7 +89,7 @@ class BreastCancer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    cancers: state.cancer.cancerResult,
+    Diabetes: state.diabetes.cancerResult,
   };
 };
-export default connect(mapStateToProps, { createCancer })(BreastCancer);
+export default connect(mapStateToProps, { createDiabete })(Diabetes);

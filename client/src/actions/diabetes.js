@@ -1,4 +1,4 @@
-import diabete from '../api/index';
+import diabete from "../api/index";
 
 /* import {
     CREATE_DIABETE,
@@ -7,19 +7,23 @@ import diabete from '../api/index';
     DELETE_DIABETE,
     EDIT_DIABETE
   } from './types'; */
-import {
-  CREATE_DIABETE,
-  FETCH_DIABETES,
-} from './types';
+import { CREATE_DIABETE, FETCH_DIABETES } from "./types";
 
-
-export const createDiabete = formValues => async (dispatch) => {
-  const response = await diabete.post('/healthcare/api/v1/diabetes/add', { ...formValues });
-  dispatch({ type: CREATE_DIABETE, payload: response.data });
+export const createDiabete = (formValues) => async (dispatch) => {
+  const response = await diabete.post(
+    "/healthcare/api/v1/diabetes/add",
+    { ...formValues },
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  dispatch({ type: CREATE_DIABETE, payload: response.data.result });
 };
 
-export const fetchDiabetes = () => async dispatch => {
-  const response = await diabete.get('/healthcare/api/v1/diabetes');
+export const fetchDiabetes = () => async (dispatch) => {
+  const response = await diabete.get("/healthcare/api/v1/diabetes");
 
   dispatch({ type: FETCH_DIABETES, payload: response.data });
 };
